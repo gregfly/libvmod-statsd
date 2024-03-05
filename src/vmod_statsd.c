@@ -379,3 +379,16 @@ vmod_gauge( const struct vrt_ctx *ctx, struct VPFX(priv) *priv, const char *key,
     _send_to_statsd( priv, key, val, ctx );
 }
 
+VCL_VOID
+vmod_set( const struct vrt_ctx *ctx, struct VPFX(priv) *priv, const char *key, const char *uniq ) {
+    VSLb(ctx->vsl, SLT_VCL_Log, "vmod-statsd: set: %s = %s", key, uniq );
+
+    // Get the buffer ready. 300 for the maximum lenghth of an int and +5 for metadata
+    char val[ 305 ];
+
+    // looks like: uniques:765|s
+    snprintf( val, sizeof(val), ":%s|s", uniq );
+
+    _send_to_statsd( priv, key, val, ctx );
+}
+
