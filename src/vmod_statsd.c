@@ -344,7 +344,7 @@ VCL_VOID
 vmod_timing( const struct vrt_ctx *ctx, struct VPFX(priv) *priv, const char *key, VCL_INT num ) {
     VSLb(ctx->vsl, SLT_VCL_Log, "vmod-statsd: timing: %s = %ld", key, num );
 
-    // Get the buffer ready. 10 for the maximum lenghth of an int and +5 for metadata
+    // Get the buffer ready. 10 for the maximum length of an int and +5 for metadata
     char val[ 15 ];
 
     // looks like glork:320|ms
@@ -357,7 +357,7 @@ VCL_VOID
 vmod_counter( const struct vrt_ctx *ctx, struct VPFX(priv) *priv, const char *key, VCL_INT num ) {
     VSLb(ctx->vsl, SLT_VCL_Log, "vmod-statsd: counter: %s = %ld", key, num );
 
-    // Get the buffer ready. 10 for the maximum lenghth of an int and +5 for metadata
+    // Get the buffer ready. 10 for the maximum length of an int and +5 for metadata
     char val[ 15 ];
 
     // looks like: gorets:42|c
@@ -370,7 +370,7 @@ VCL_VOID
 vmod_gauge( const struct vrt_ctx *ctx, struct VPFX(priv) *priv, const char *key, VCL_INT num ) {
     VSLb(ctx->vsl, SLT_VCL_Log, "vmod-statsd: gauge: %s = %ld", key, num );
 
-    // Get the buffer ready. 10 for the maximum lenghth of an int and +5 for metadata
+    // Get the buffer ready. 10 for the maximum length of an int and +5 for metadata
     char val[ 15 ];
 
     // looks like: gaugor:333|g
@@ -383,8 +383,8 @@ VCL_VOID
 vmod_set( const struct vrt_ctx *ctx, struct VPFX(priv) *priv, const char *key, const char *uniq ) {
     VSLb(ctx->vsl, SLT_VCL_Log, "vmod-statsd: set: %s = %s", key, uniq );
 
-    // Get the buffer ready. 300 for the maximum lenghth of an int and +5 for metadata
-    char val[ 305 ];
+    // Get the buffer ready. length of an str and +5 for metadata
+    char val[ strlen(uniq) + 5 ];
 
     // looks like: uniques:765|s
     snprintf( val, sizeof(val), ":%s|s", uniq );
